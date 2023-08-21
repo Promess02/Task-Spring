@@ -1,0 +1,8 @@
+io\github\mat3e\model\SqlTaskRepository.class
+io\github\mat3e\controller\InfoController.class
+io\github\mat3e\model\Task.class
+io\github\mat3e\model\TaskRepository.class
+io\github\mat3e\TaskConfigurationProperties.class
+io\github\mat3e\TaskConfigurationProperties$Template.class
+io\github\mat3e\TodoAppApplication.class
+io\github\mat3e\controller\TaskController.class

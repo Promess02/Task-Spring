@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "task",
+      "type": "io.github.mat3e.TaskConfigurationProperties",
+      "sourceType": "io.github.mat3e.TaskConfigurationProperties"
+    },
+    {
+      "name": "task.template",
+      "type": "io.github.mat3e.TaskConfigurationProperties$Template",
+      "sourceType": "io.github.mat3e.TaskConfigurationProperties",
+      "sourceMethod": "getTemplate()"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}
