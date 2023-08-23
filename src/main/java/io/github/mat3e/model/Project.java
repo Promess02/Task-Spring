@@ -23,6 +23,14 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
     private Set<ProjectStep> steps;
 
+    public Project(){
+
+    }
+    public Project(String description, Set<ProjectStep> steps) {
+        this.description = description;
+        this.steps = steps;
+    }
+
     public int getId() {
         return id;
     }
