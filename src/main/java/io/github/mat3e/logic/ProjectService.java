@@ -48,20 +48,20 @@ public class ProjectService {
         Project project = projectRepository.findById(projectId).
                 orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
 
-        project.getSteps().stream().max(Comparator.comparing(ProjectStep::getDaysToDeadline))
-                .ifPresent(step -> minDeadline = LocalDateTime.now().plusDays(Integer.max(step.getDaysToDeadline(),-step.getDaysToDeadline())));
-
-        if(minDeadline.isAfter(deadline)) throw new IllegalArgumentException("Given deadline is after the deadline set by the project");
 
         TaskGroup result = projectRepository.findById(projectId)
                 .map(project1 -> {
                     var targetGroup = new TaskGroup();
                     targetGroup.setDescription(project.getDescription());
                     targetGroup.setTasks(
-                            project1.getSteps().stream()
-                                    .map(projectStep -> projectStep.toTask(deadline)).collect(Collectors.toSet())
+                            project.getSteps().stream()
+                                    .map(projectStep -> new Task(
+                                            projectStep.getDescription(),
+                                            deadline.plusDays(projectStep.getDaysToDeadline()))
+                                    ).collect(Collectors.toSet())
                     );
-                    return targetGroup;
+                    targetGroup.setProject(project);
+                    return taskGroupRepository.save(targetGroup);
                 }).orElseThrow(() -> new IllegalArgumentException("Project with given id not found"));
 
         return new GroupReadModel(result);
