@@ -1,22 +1,19 @@
 package io.github.mat3e.logic;
 
-import io.github.mat3e.TaskConfigurationProperties;
-import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskGroup;
 import io.github.mat3e.model.projection.GroupReadModel;
 import io.github.mat3e.model.projection.GroupWriteModel;
 import io.github.mat3e.repos.TaskGroupRepository;
 import io.github.mat3e.repos.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 @RequestScope
 public class TaskGroupService {
+
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
 

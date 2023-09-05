@@ -2,23 +2,18 @@ package io.github.mat3e.logic;
 
 import io.github.mat3e.TaskConfigurationProperties;
 import io.github.mat3e.model.Project;
-import io.github.mat3e.model.ProjectStep;
 import io.github.mat3e.model.Task;
 import io.github.mat3e.model.TaskGroup;
-import io.github.mat3e.model.projection.*;
+import io.github.mat3e.model.projection.GroupReadModel;
+import io.github.mat3e.model.projection.ProjectDTO;
 import io.github.mat3e.repos.ProjectRepository;
 import io.github.mat3e.repos.TaskGroupRepository;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 @RequestScope
 public class ProjectService {
     private ProjectRepository projectRepository;
