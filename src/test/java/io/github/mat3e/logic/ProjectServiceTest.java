@@ -28,7 +28,7 @@ class ProjectServiceTest {
 
         var mockConfig = configurationReturning(false);
         // system under test
-        var toTest = new ProjectService(null, mockGroupRepository,mockConfig);
+        var toTest = new ProjectService(null, mockGroupRepository,null,mockConfig);
 
         //when
         var exception = catchThrowable(() -> toTest.createGroup(0, LocalDateTime.now()));
@@ -51,7 +51,7 @@ class ProjectServiceTest {
         var mockRepository = mock(ProjectRepository.class);
         when(mockRepository.findById(anyInt())).thenReturn(Optional.empty());
         // system under test
-        var toTest = new ProjectService(mockRepository, null,mockConfig);
+        var toTest = new ProjectService(mockRepository, null,null,mockConfig);
         //when
         var exception = catchThrowable(() -> toTest.createGroup(0, LocalDateTime.now()));
 
@@ -74,7 +74,7 @@ class ProjectServiceTest {
         //and
         TaskGroupRepository mockGroupRepository = groupRepositoryReturning(false);
         // system under test
-        var toTest = new ProjectService(mockRepository, mockGroupRepository,mockConfig);
+        var toTest = new ProjectService(mockRepository, mockGroupRepository,null,mockConfig);
         //when
         var exception = catchThrowable(() -> toTest.createGroup(0, LocalDateTime.now()));
 
@@ -98,11 +98,12 @@ class ProjectServiceTest {
                 .thenReturn(Optional.of(project));
         // and
         var inMemoryGroupRepo = inMemoryGroupRepository();
+        var serviceWithInMemRepo = dummyGroupService(inMemoryGroupRepo);
         int countBeforeCall = inMemoryGroupRepo.count();
         // and
         TaskConfigurationProperties mockConfig = configurationReturning(true);
         // system under test
-        var toTest = new ProjectService(mockRepository,inMemoryGroupRepo,mockConfig);
+        var toTest = new ProjectService(mockRepository,inMemoryGroupRepo,serviceWithInMemRepo,mockConfig);
 
         // when
         var result = toTest.createGroup(0, today);
@@ -112,6 +113,10 @@ class ProjectServiceTest {
         assertThat(result.getTasks()).allMatch(task -> task.getDescription().equals("foo"));
         assertThat(countBeforeCall+1)
                 .isEqualTo(inMemoryGroupRepo.count());
+    }
+
+    private static TaskGroupService dummyGroupService(inMemoryGroupRepository inMemoryGroupRepo) {
+        return new TaskGroupService(inMemoryGroupRepo, null);
     }
 
     private Project projectWith(String projectDescription, Set<Integer> daysToDeadline){

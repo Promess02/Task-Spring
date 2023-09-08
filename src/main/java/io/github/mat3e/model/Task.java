@@ -35,7 +35,6 @@ public class Task {
 //
 //            }
 //    )
-
     public Audit getAudit() {
         return audit;
     }
@@ -47,11 +46,15 @@ public class Task {
 
     public Task() {
     }
-
-
-    public Task(String description, LocalDateTime deadline) {
+    public Task(String description, LocalDateTime deadline, TaskGroup group){
         this.description = description;
         this.deadline = deadline;
+        if(group!=null){
+            this.group = group;
+        }
+    }
+    public Task(String description, LocalDateTime deadline) {
+        this(description,deadline,null);
     }
 
     public int getId() {

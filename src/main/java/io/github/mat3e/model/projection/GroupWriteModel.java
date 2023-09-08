@@ -31,7 +31,8 @@ public class GroupWriteModel {
         var result = new TaskGroup();
         result.setDescription(this.description);
         result.setTasks(
-                tasks.stream().map(GroupTaskWriteModel::toTask).collect(Collectors.toSet())
+                tasks.stream()
+                        .map(source -> source.toTask(result)).collect(Collectors.toSet())
         );
         return result;
     }

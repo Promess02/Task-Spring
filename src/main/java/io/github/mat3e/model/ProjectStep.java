@@ -64,7 +64,7 @@ public class ProjectStep {
     }
 
     public Task toTask(LocalDateTime deadline){
-        return new GroupTaskWriteModel(this.description, deadline.minusDays(Integer.max(daysToDeadline, -daysToDeadline))).toTask();
+        return new GroupTaskWriteModel(this.description, deadline.minusDays(Integer.max(daysToDeadline, -daysToDeadline))).toTask(null);
     }
 
     public GroupTaskWriteModel toTaskWriteModel(LocalDateTime deadline){
