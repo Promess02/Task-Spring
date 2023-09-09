@@ -63,7 +63,9 @@ class TaskController {
                             repository.save(task);
                         });
 
-        return ResponseEntity.noContent().build();
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // transactions work in a way that when an exception is thrown during
